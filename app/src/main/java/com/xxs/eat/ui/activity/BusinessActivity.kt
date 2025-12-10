@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.WindowInsets
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -61,6 +62,17 @@ class BusinessActivity : AppCompatActivity() {
         }
         return hasNavigationBar
     }
+
+    fun addImageButton(ib: ImageButton, width: Int, height: Int) {
+        binding.flContainer.addView(ib,width, height)
+    }
+
+    fun getCartLocation(): IntArray {
+        val destLocation = IntArray(2)
+        binding.imgCart.getLocationInWindow(destLocation)
+        return destLocation
+    }
+
     val titles = listOf<String>("商品", "商家", "评论")
     // 修改 Adapter 类以继承 androidx.fragment.app.FragmentPagerAdapter 正确实现
 inner class BusinessFragmentAdapter :

@@ -13,6 +13,8 @@ class GoodsInfo {
     var sellerId: Int = 0
     var typeId: Int = 0
     var typeName: String? = null
+    var count: Int = 0
+
 
     constructor()
     constructor(

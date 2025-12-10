@@ -43,9 +43,11 @@ class GoodsTypeAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFr
     inner class GoodsTypeItemHolder(val item: View): RecyclerView.ViewHolder(item){
         val tvType: TextView
         var mPosition = 0
+        val tvRedDotCount: TextView
         lateinit var goodsTypeInfo: GoodsTypeInfo
         init {
             tvType = item.findViewById(R.id.type)
+            tvRedDotCount = item.findViewById(R.id.tvRedDotCount)
             item.setOnClickListener {
                 selectPosition = mPosition
                 notifyDataSetChanged()
@@ -67,6 +69,12 @@ class GoodsTypeAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFr
                 tvType.setTypeface(Typeface.DEFAULT)
             }
             tvType.text = goodsTypeInfo.name
+            tvRedDotCount.text = goodsTypeInfo.redDotCount.toString()
+            if(goodsTypeInfo.redDotCount > 0){
+                tvRedDotCount.visibility = View.VISIBLE
+            }else{
+                tvRedDotCount.visibility = View.GONE
+            }
         }
     }
 }
