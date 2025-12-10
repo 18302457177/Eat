@@ -99,14 +99,14 @@ class GoodsAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFragme
                 R.id.ib_add->{
                     isAdd = true
                     doAddOperation()
+                    processRedDotCount(isAdd)
                 }
                 R.id.ib_minus->{
                     isAdd = false
                     doMinusOperation()
-                }
-                else->{
                     processRedDotCount(isAdd)
                 }
+
             }
         }
 
