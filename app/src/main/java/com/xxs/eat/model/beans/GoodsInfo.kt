@@ -1,5 +1,7 @@
 package com.xxs.eat.model.beans
 
+import cn.jiguang.b.b.i
+
 class GoodsInfo {
     var id: Int = 0 //商品id
     var name: String? = null //商品名称
@@ -8,7 +10,7 @@ class GoodsInfo {
     var monthSaleNum: Int = 0 //月销售量
     var isBargainPrice: Boolean = false //特价
     var isNew: Boolean = false //是否是新产品
-    var newPrice: String? = null //新价
+    var newPrice: Int = 0 //新价
     var oldPrice: Int = 0 //原价
     var sellerId: Int = 0
     var typeId: Int = 0
@@ -22,7 +24,7 @@ class GoodsInfo {
         typeId: Int,
         sellerId: Int,
         oldPrice: Int,
-        newPrice: String?,
+        newPrice:   Int,
         isNew: Boolean,
         isBargainPrice: Boolean,
         monthSaleNum: Int,

@@ -13,8 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xxs.eat.R
-import com.xxs.eat.dagger2.component.DaggerHomeFragmentComponent
-import com.xxs.eat.dagger2.module.HomeFragmentModule
+
 import com.xxs.eat.databinding.FragmentHomeBinding
 import com.xxs.eat.model.beans.Seller
 import com.xxs.eat.presenter.HomeFragmentPresenter

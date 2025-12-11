@@ -18,10 +18,13 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.squareup.picasso.Picasso
 import com.xxs.eat.R
+import com.xxs.eat.model.beans.CacheSelectedInfo
 import com.xxs.eat.model.beans.GoodsInfo
 import com.xxs.eat.ui.activity.BusinessActivity
 import com.xxs.eat.ui.fragment.GoodsFragment
+import com.xxs.eat.utils.Constants
 import com.xxs.eat.utils.PriceFormater
+import com.xxs.eat.utils.TakeoutApp
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter
 
 class GoodsAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFragment): BaseAdapter(), StickyListHeadersAdapter {
@@ -99,15 +102,15 @@ class GoodsAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFragme
                 R.id.ib_add->{
                     isAdd = true
                     doAddOperation()
-                    processRedDotCount(isAdd)
+
                 }
                 R.id.ib_minus->{
                     isAdd = false
                     doMinusOperation()
-                    processRedDotCount(isAdd)
                 }
-
             }
+            processRedDotCount(isAdd)
+            (goodsFragment.activity as BusinessActivity).updateCarUi()
         }
 
         private fun doMinusOperation() {
@@ -116,6 +119,9 @@ class GoodsAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFragme
                 val animationSet: AnimationSet = getHidenAnimation()
                 tvCount.startAnimation(animationSet)
                 btnMinus.startAnimation(animationSet)
+                TakeoutApp.sInstance.deleteCacheSelectedInfo(goodsInfo.id)
+            }else{
+                TakeoutApp.sInstance.updateCacheSelectedInfo(goodsInfo.id, Constants.MINUS)
             }
             count--
             goodsInfo.count = count
@@ -128,6 +134,9 @@ class GoodsAdapter(val context: FragmentActivity?,val goodsFragment: GoodsFragme
                 val animationSet: AnimationSet = getShowAnimation()
                 tvCount.startAnimation(animationSet)
                 btnMinus.startAnimation(animationSet)
+                TakeoutApp.sInstance.addCacheSelectedInfo(CacheSelectedInfo(goodsInfo.sellerId,goodsInfo.typeId,goodsInfo.id,1))
+            }else{
+                TakeoutApp.sInstance.updateCacheSelectedInfo(goodsInfo.id, Constants.ADD)
             }
             count++
             goodsInfo.count = count

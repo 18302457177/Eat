@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import com.xxs.eat.R
 import com.xxs.eat.model.beans.Seller
 import com.xxs.eat.ui.activity.BusinessActivity
+import com.xxs.eat.utils.TakeoutApp
 import kotlin.jvm.java
 
 class HomeRvAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -92,6 +93,8 @@ class HomeRvAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.Vie
         val tvSendPrice: TextView
         val tvDistance: TextView
 
+        lateinit var mSeller: Seller
+
         init{
             tvTile = item.findViewById<TextView>(R.id.tv_title)
             ivLogo = item.findViewById<ImageView>(R.id.seller_logo)
@@ -101,11 +104,19 @@ class HomeRvAdapter(val context: Context): RecyclerView.Adapter<RecyclerView.Vie
             tvDistance = item.findViewById<TextView>(R.id.tv_home_distance)
             item.setOnClickListener {
                 val intent: Intent = Intent(context, BusinessActivity::class.java)
+                var hasSelectInfo = false
+                val count = TakeoutApp.sInstance.queryCacheSelectedInfoBySellerId(mSeller.id.toInt())
+                if(count>0){
+                    hasSelectInfo = true
+                }
+                intent.putExtra("seller",mSeller)
+                intent.putExtra("hasSelectInfo",hasSelectInfo)
                 context.startActivity(intent)
             }
         }
         @SuppressLint("SetTextI18n")
         fun bindData(seller: Seller){
+            this.mSeller = seller
             tvTile.text = seller.name
             Picasso.with( context).load(seller.icon).into(ivLogo)
             rbScore.rating = seller.score.toFloat()

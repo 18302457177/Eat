@@ -12,6 +12,7 @@ import com.xxs.eat.databinding.FragmentGoodsBinding
 import com.xxs.eat.model.beans.GoodsInfo
 import com.xxs.eat.model.beans.GoodsTypeInfo
 import com.xxs.eat.presenter.GoodsFragmentPresenter
+import com.xxs.eat.ui.activity.BusinessActivity
 import com.xxs.eat.ui.adapter.GoodsAdapter
 import com.xxs.eat.ui.adapter.GoodsTypeAdapter
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView
@@ -46,7 +47,7 @@ class GoodsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        goodsFragmentPresenter.getBusinessInfo("1")
+        goodsFragmentPresenter.getBusinessInfo((activity as BusinessActivity).seller.id.toString())
     }
 
     fun onLoadBusinessSuccess(goodsTypeList: List<GoodsTypeInfo>,allTypeGoodsList:List<GoodsInfo>){

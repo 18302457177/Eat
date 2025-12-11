@@ -17,7 +17,7 @@ data class Seller(
     var time: String,
     var icon: String,
     var activityList: List<ActivityInfo>
-) {
+):java.io.Serializable {
 
 //    var id:Long = 0
 //    var pic:String? = null
